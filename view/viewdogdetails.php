@@ -98,7 +98,7 @@
         <a href="index.php?command=editDog&dog_id=<?php echo urlencode($dog->dog_id); ?>">Edit</a>
         
         <!-- Delete button, passing dog_id and confirming the action -->
-        <a href="index.php?command=deleteDog&dog_name=<?php echo urlencode($dog->dog_name); ?>" class="delete" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+        <a href="index.php?command=deleteDog&dog_id=<?php echo urlencode($dog->dog_id); ?>" class="delete" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
     </div>
 <?php else: ?>
     <p>No dog found with the given details.</p>
