@@ -75,8 +75,26 @@ class Model
    
     public function deleteDog($dog_id)
     {
+        // First, fetch the dog record to get the image path (img_dir)
+        $stmt = $this->db->prepare("SELECT img_dir FROM dog_records WHERE dog_id = ?");
+        $stmt->bind_param("i", $dog_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // If the dog exists, proceed to delete the image and the dog record
+        if ($result && $result->num_rows > 0) {
+            $dog = $result->fetch_object();
+            $img_path = $dog->img_dir;  // Get the image path from the database
+
+            // Check if the file exists and delete it
+            if (file_exists($img_path)) {
+                unlink($img_path);  // Delete the file from the server
+            }
+        }
+
+        // Now delete the dog record from the database
         $stmt = $this->db->prepare("DELETE FROM dog_records WHERE dog_id = ?");
-        $stmt->bind_param("i", $dog_id);  // Use "i" for integer binding
+        $stmt->bind_param("i", $dog_id);
         return $stmt->execute();
     }
 
