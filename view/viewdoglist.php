@@ -34,7 +34,7 @@
             if (!empty($dogs)) {
                 foreach ($dogs as $dog) {
                     echo "<tr>";
-                    echo "<td><a href='index.php?command=viewSpecific&dog_name=" . urlencode($dog->dog_name) . "'>" . htmlspecialchars($dog->dog_name) . "</a></td>";
+                    echo "<td><a href='index.php?command=dogView&dog_id=" . urlencode($dog->dog_id) . "'>" . htmlspecialchars($dog->dog_name) . "</a></td>";
                     echo "<td>" . htmlspecialchars($dog->dog_breed) . "</td>";
                     echo "<td>" . htmlspecialchars($dog->dog_age) . "</td>";
                     echo "<td>" . htmlspecialchars($dog->dog_weight) . "</td>";

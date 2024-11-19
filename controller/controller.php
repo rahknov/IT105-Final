@@ -36,18 +36,7 @@ class Controller
                     include 'view/viewdoglist.php';
                     break;
                 }
-            case 'viewSpecific':
-                {
-                    // Get the dog name from the URL parameters
-                    $dog_name = isset($_REQUEST['dog_name']) ? $_REQUEST['dog_name'] : null;
-
-                    // Fetch the specific dog's details using the model
-                    $dog = $this->model->fetchDogByName($dog_name);
-
-                    // Load the specific view for displaying the dog's details
-                    include 'view/viewdogdetails.php';
-                    break;
-                }
+            
             
                 case 'deleteDog':
                     {
@@ -104,6 +93,19 @@ class Controller
                     
                             // Load the edit form with pre-filled data
                             include 'view/editdog.php';
+                            break;
+                        }
+
+                    case 'dogView':
+                        {
+                            // Get the dog_id from the URL parameters
+                            $dog_id = isset($_REQUEST['dog_id']) ? $_REQUEST['dog_id'] : null;
+                    
+                            // Fetch the specific dog's details using the model
+                            $dog = $this->model->fetchDogById($dog_id);
+                    
+                            // Load the edit form with pre-filled data
+                            include 'view/viewdogdetails.php';
                             break;
                         }
                     
