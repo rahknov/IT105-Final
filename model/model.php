@@ -109,6 +109,31 @@ class Model
         return $dog;
     }
 
+    public function searchDogs($searchTerm)
+{
+    $data = [];
+    $query = "SELECT * FROM dog_records WHERE 
+              dog_name LIKE ? OR 
+              dog_breed LIKE ? OR 
+              CAST(dog_age AS CHAR) LIKE ? OR 
+              CAST(dog_weight AS CHAR) LIKE ? OR 
+              owner_name LIKE ? OR 
+              owner_phone LIKE ? OR 
+              vaccination_status LIKE ?";
+    
+    $searchPattern = "%" . $searchTerm . "%";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("sssssss", $searchPattern, $searchPattern, $searchPattern, $searchPattern, $searchPattern, $searchPattern, $searchPattern);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_object()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
 
 
     

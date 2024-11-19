@@ -137,6 +137,15 @@ class Controller
                             }
                             break;
                         }
+                        case 'searchDogs':
+                            {
+                                $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+                                $dogs = $this->model->searchDogs($searchTerm);
+                                include 'view/viewdoglist.php';
+                                break;
+                            }
+                        
+                        
                     
             }
     }

@@ -8,6 +8,14 @@
 <body>
 
     <h2>Dog List</h2>
+
+    <!-- Search Form -->
+    <form method="get" action="index.php" style="text-align: center; margin-bottom: 20px;">
+        <input type="hidden" name="command" value="searchDogs">
+        <input type="text" name="search" placeholder="Search by any field..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" style="width: 50%; padding: 5px;" />
+        <button type="submit">Search</button>
+    </form>
+
     <table border="1" cellpadding="10" cellspacing="0" align="center">
         <thead>
             <tr>
@@ -23,23 +31,24 @@
         </thead>
         <tbody>
             <?php
-            // Assuming you have a $dogs array or list fetched from the database
-            // Loop through each dog record
-            foreach ($dogs as $dog) {
-                echo "<tr>";
-                // Wrap dog name in a hyperlink
-                echo "<td><a href='index.php?command=viewSpecific&dog_name=" . urlencode($dog->dog_name) . "'>" . htmlspecialchars($dog->dog_name) . "</a></td>";
-                echo "<td>" . htmlspecialchars($dog->dog_breed) . "</td>";
-                echo "<td>" . htmlspecialchars($dog->dog_age) . "</td>";
-                echo "<td>" . htmlspecialchars($dog->dog_weight) . "</td>";
-                echo "<td>" . htmlspecialchars($dog->owner_name) . "</td>";
-                echo "<td>" . htmlspecialchars($dog->owner_phone) . "</td>";
-                echo "<td>" . htmlspecialchars($dog->vaccination_status) . "</td>";
-                echo "<td>
-                        <a href='index.php?command=editDog&dog_id=" . urlencode($dog->dog_id) . "'>Edit</a> | 
-                        <a href='index.php?command=deleteDog&dog_name=" . urlencode($dog->dog_name) . "' onclick='return confirm(\"Are you sure you want to delete this dog?\")'>Delete</a>
-                    </td>";
-                echo "</tr>";
+            if (!empty($dogs)) {
+                foreach ($dogs as $dog) {
+                    echo "<tr>";
+                    echo "<td><a href='index.php?command=viewSpecific&dog_name=" . urlencode($dog->dog_name) . "'>" . htmlspecialchars($dog->dog_name) . "</a></td>";
+                    echo "<td>" . htmlspecialchars($dog->dog_breed) . "</td>";
+                    echo "<td>" . htmlspecialchars($dog->dog_age) . "</td>";
+                    echo "<td>" . htmlspecialchars($dog->dog_weight) . "</td>";
+                    echo "<td>" . htmlspecialchars($dog->owner_name) . "</td>";
+                    echo "<td>" . htmlspecialchars($dog->owner_phone) . "</td>";
+                    echo "<td>" . htmlspecialchars($dog->vaccination_status) . "</td>";
+                    echo "<td>
+                            <a href='index.php?command=editDog&dog_id=" . urlencode($dog->dog_id) . "'>Edit</a> | 
+                            <a href='index.php?command=deleteDog&dog_name=" . urlencode($dog->dog_name) . "' onclick='return confirm(\"Are you sure you want to delete this dog?\")'>Delete</a>
+                          </td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8' style='text-align: center;'>No dogs found.</td></tr>";
             }
             ?>
         </tbody>
