@@ -73,10 +73,10 @@ class Model
         return $dog;
     }
    
-    public function deleteDog($dog_name)
+    public function deleteDog($dog_id)
     {
-        $stmt = $this->db->prepare("DELETE FROM dog_records WHERE dog_name = ?");
-        $stmt->bind_param("s", $dog_name);
+        $stmt = $this->db->prepare("DELETE FROM dog_records WHERE dog_id = ?");
+        $stmt->bind_param("i", $dog_id);  // Use "i" for integer binding
         return $stmt->execute();
     }
 

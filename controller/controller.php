@@ -40,11 +40,11 @@ class Controller
             
                 case 'deleteDog':
                     {
-                    $dog_name = $_REQUEST['dog_name'];
-                    $result = $this->model->deleteDog($dog_name);
-                    $message = $result ? "Dog deleted successfully." : "Error deleting dog.";
-                    echo "<script>alert('$message'); window.location.href='index.php?command=viewDogs';</script>";
-                    break;
+                        $dog_id = $_REQUEST['dog_id'];  // Get the dog_id from the request
+                        $result = $this->model->deleteDog($dog_id);  // Pass dog_id to the deleteDog function
+                        $message = $result ? "Dog deleted successfully." : "Error deleting dog.";
+                        echo "<script>alert('$message'); window.location.href='index.php?command=viewDogs';</script>";
+                        break;
                     }
                     
                 case 'addView':

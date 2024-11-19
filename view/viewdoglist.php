@@ -43,7 +43,7 @@
                     echo "<td>" . htmlspecialchars($dog->vaccination_status) . "</td>";
                     echo "<td>
                             <a href='index.php?command=editDog&dog_id=" . urlencode($dog->dog_id) . "'>Edit</a> | 
-                            <a href='index.php?command=deleteDog&dog_name=" . urlencode($dog->dog_name) . "' onclick='return confirm(\"Are you sure you want to delete this dog?\")'>Delete</a>
+                            <a href='index.php?command=deleteDog&dog_id=" . urlencode($dog->dog_id) . "' onclick='return confirm(\"Are you sure you want to delete this dog?\")'>Delete</a>
                           </td>";
                     echo "</tr>";
                 }
